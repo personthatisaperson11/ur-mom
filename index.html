@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>the secret reviewer 🍝</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@500;600;700;800&display=swap');
+
+:root{--pink:#ff9dca;--peach:#ffd8c2;--cream:#fffaf4;--blue:#bcecff;--purple:#cbb9ff;--green:#c7f3df;--ink:#2f3047;--purpleInk:#684875;--shadow:0 20px 50px rgba(87,62,103,.14)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:'Nunito',sans-serif;color:var(--ink);background:radial-gradient(circle at 8% 12%,rgba(255,255,255,.95) 0 7%,transparent 7.5%),radial-gradient(circle at 88% 16%,rgba(255,255,255,.85) 0 6%,transparent 6.5%),linear-gradient(135deg,#ffe6f1,#fff1db 40%,#dff7ff 74%,#e5dcff);overflow-x:hidden}
+body:before{content:"";position:fixed;inset:-10%;pointer-events:none;z-index:0;background:repeating-linear-gradient(12deg,rgba(255,255,255,.11) 0 16px,rgba(255,126,173,.06) 16px 32px);transform:rotate(-2deg);animation:bg 7s ease-in-out infinite alternate}
+@keyframes bg{to{transform:rotate(2deg) translateX(1%)}}
+button{font:inherit;cursor:pointer}
+.app{width:min(1160px,94%);margin:auto;padding:22px 0 48px;position:relative;z-index:2}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:18px}
+.brand h1{margin:0;font:700 clamp(34px,6vw,58px)/.95 'Fredoka',sans-serif;color:var(--purpleInk);text-shadow:0 4px #fff}
+.brand p{margin:8px 0 0;display:inline-block;background:rgba(255,255,255,.82);padding:7px 11px;border-radius:999px;font-weight:800}
+.top{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.pill,.reset{border:0;border-radius:14px;padding:10px 13px;font-weight:900;box-shadow:0 8px 18px rgba(90,65,105,.1)}
+.pill{background:rgba(255,255,255,.92)}.reset{background:#674672;color:#fff}
+.layout{display:grid;grid-template-columns:1.28fr .72fr;gap:18px}.card{background:rgba(255,255,255,.94);border:2px solid rgba(255,255,255,.9);border-radius:28px;box-shadow:var(--shadow);padding:22px}
+.scene{min-height:700px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.restaurant{position:absolute;inset:0;background:linear-gradient(180deg,#ffe8d6 0 58%,#9e6a50 58% 100%);overflow:hidden}
+.light{position:absolute;top:42px;width:75px;height:75px;border-radius:50%;background:#fff3b8;box-shadow:0 0 45px rgba(255,244,184,.9)}.l1{left:13%}.l2{left:48%;transform:scale(.8)}.l3{right:11%;transform:scale(.7)}
+.frame{position:absolute;top:135px;width:110px;height:130px;background:#fff7ef;border:10px solid #d9b39f;border-radius:15px}.f1{left:9%}.f2{right:11%;transform:rotate(2deg)}
+.plant{position:absolute;left:4%;bottom:16%;font-size:78px}.counter{position:absolute;left:10%;right:10%;bottom:21%;height:120px;border-radius:26px 26px 0 0;background:linear-gradient(#9f674d,#7c4b38);border:7px solid #c88967}.register{position:absolute;right:12%;bottom:31%;font-size:60px}.table{position:absolute;right:14%;bottom:12%;width:170px;height:95px;background:#a96e4f;border-radius:50%;box-shadow:0 16px 0 #724732}.table:after{content:'🍝';position:absolute;top:-28px;left:55px;font-size:54px}.waiter{position:absolute;left:29%;bottom:16%;font-size:105px}
+.storybox{position:relative;z-index:5;width:min(800px,95%);margin:0 auto 18px;background:rgba(255,255,255,.96);border-radius:25px;padding:20px;text-align:center}.chapter{display:inline-block;padding:6px 11px;background:#f2eaff;border-radius:999px;color:#664d83;font-size:13px;font-weight:900}.storybox h2{margin:9px 0 8px;font:700 30px/1.1 'Fredoka',sans-serif;color:var(--purpleInk)}.storybox p{margin:0;font-size:16px;line-height:1.55;font-weight:800}
+.choices{margin-top:15px;display:grid;grid-template-columns:1fr 1fr;gap:10px}.choice{border:2px solid #eee4fb;border-radius:18px;padding:14px;text-align:left;background:linear-gradient(135deg,#fff,#fff4fa);color:#4b3857;font-weight:900;transition:.16s}.choice:hover{transform:translateY(-3px);box-shadow:0 10px 18px rgba(96,67,111,.12)}
+.side{display:grid;gap:18px}.side h3{margin:0 0 12px;font:700 22px 'Fredoka',sans-serif;color:var(--purpleInk)}.meter{margin:11px 0}.meterline{display:flex;justify-content:space-between;margin-bottom:6px;font-weight:900}.bar{height:15px;background:#edf0f5;border-radius:999px;overflow:hidden}.fill{height:100%;border-radius:inherit;transition:width .25s}.annoyance{background:#ff83ad}.review{background:#c7a5ff}.suspicion{background:#83d7ff}.stats{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}.stat{padding:10px;background:#faf6ff;border-radius:15px;font-weight:900}.inventory{display:flex;flex-wrap:wrap;gap:8px}.item{background:#fff0f7;border-radius:999px;padding:8px 10px;font-weight:800}.small{font-size:13px;opacity:.68;line-height:1.45}.log{max-height:210px;overflow:auto;display:grid;gap:7px}.event{background:#f8f7ff;border-radius:13px;padding:8px 10px;font-size:14px;font-weight:700}.reviewbox{margin-top:12px;padding:14px;border-radius:18px;background:#fff9df;border:2px dashed #f0c760;display:none}.stars{font-size:28px;letter-spacing:4px;margin:8px 0}
+.ending{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(34,24,42,.78);z-index:80;padding:20px}.endingbox{width:min(680px,100%);background:#fff;border-radius:30px;padding:28px;text-align:center;box-shadow:0 30px 90px rgba(0,0,0,.24)}.endingemoji{font-size:90px}.endingbox h2{margin:9px 0;font:700 36px 'Fredoka',sans-serif;color:var(--purpleInk)}.endingbox p{font-weight:800;line-height:1.55}.endbuttons{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:18px}.endbuttons button{border:0;border-radius:15px;padding:12px 16px;background:#ff98c7;color:#fff;font-weight:900}.endbuttons .alt{background:#9fe0ff;color:#443461}
+.candy{position:fixed;z-index:90;font-size:34px;pointer-events:none;animation:fall 1.5s linear forwards}@keyframes fall{from{transform:translateY(-30px) rotate(0);opacity:1}to{transform:translateY(95vh) rotate(600deg);opacity:0}}
+@media(max-width:930px){.layout{grid-template-columns:1fr}}@media(max-width:650px){header{flex-direction:column;align-items:flex-start}.top{justify-content:flex-start}.choices{grid-template-columns:1fr}.scene{min-height:740px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<div class="brand"><h1>the secret reviewer 🍝</h1><p>chez is secretly reviewing everything.</p></div>
+<div class="top"><div class="pill">😈 annoyance <span id="annoyance">0</span></div><div class="pill">⭐ review <span id="review">0</span></div><div class="pill">👀 suspicion <span id="suspicion">0</span></div><button class="reset" id="reset">restart</button></div>
+</header>
+<div class="layout">
+<main class="card scene">
+<div class="restaurant"><div class="light l1"></div><div class="light l2"></div><div class="light l3"></div><div class="frame f1"></div><div class="frame f2"></div><div class="plant">🌿</div><div class="counter"></div><div class="register">🧾</div><div class="table"></div><div class="waiter">🧑‍🍳</div></div>
+<div class="storybox"><div class="chapter" id="chapter">chapter 1</div><h2 id="title"></h2><p id="text"></p><div class="choices" id="choices"></div><div class="reviewbox" id="reviewbox"><strong>chez's secret review is ready.</strong><div class="stars" id="stars"></div><div id="reviewtext"></div></div></div>
+</main>
+<aside class="side">
+<section class="card"><h3>📋 chez's stats</h3>
+<div class="meter"><div class="meterline"><span>😈 annoyance</span><span id="annoyancelabel">0</span></div><div class="bar"><div class="fill annoyance" id="annoyancefill"></div></div></div>
+<div class="meter"><div class="meterline"><span>⭐ review</span><span id="reviewlabel">0</span></div><div class="bar"><div class="fill review" id="reviewfill"></div></div></div>
+<div class="meter"><div class="meterline"><span>👀 suspicion</span><span id="suspicionlabel">0</span></div><div class="bar"><div class="fill suspicion" id="suspicionfill"></div></div></div>
+<div class="stats"><div class="stat">🍽️ course <span id="course">1</span></div><div class="stat">🍬 candy <span id="candy">0</span></div><div class="stat">😡 angry <span id="angry">0</span></div><div class="stat">⏰ later <span id="later">no</span></div></div>
+</section>
+<section class="card"><h3>🎒 chez's pockets</h3><div class="inventory" id="inventory"></div><p class="small">the restaurant staff still has no idea that chez is the reviewer.</p></section>
+<section class="card"><h3>📜 chaos log</h3><div class="log" id="log"></div></section>
+</aside>
+</div></div>
+<div class="ending" id="ending"><div class="endingbox"><div class="endingemoji" id="endingemoji">🍬</div><h2 id="endingtitle"></h2><p id="endingtext"></p><div class="endbuttons"><button id="again">review another restaurant 🍝</button><button class="alt" id="worse">make the review worse 💀</button></div></div></div>
+<script>
+"use strict";
+const key="secretReviewerChez_v1";
+const defaults={annoyance:0,reviewScore:0,suspicion:0,course:1,candy:0,angry:0,later:false,inventory:["📓 reviewer notebook","🖊️ suspicious pen"],flags:[]};
+let state=load();
+function fresh(){return {...defaults,inventory:[...defaults.inventory],flags:[]}}
+function load(){try{const raw=localStorage.getItem(key);if(!raw)return fresh();const p=JSON.parse(raw);return {...fresh(),...p,inventory:Array.isArray(p.inventory)?p.inventory:[...defaults.inventory],flags:Array.isArray(p.flags)?p.flags:[]}}catch(e){return fresh()}}
+function save(){localStorage.setItem(key,JSON.stringify(state))}
+function flag(x){if(!state.flags.includes(x))state.flags.push(x)}
+function add(item){if(!state.inventory.includes(item))state.inventory.push(item)}
+function inc(name,n){state[name]=Math.max(0,Math.min(100,state[name]+n))}
+function log(t){const e=document.createElement("div");e.className="event";e.textContent=t;const box=document.getElementById("log");box.prepend(e);while(box.children.length>15)box.lastElementChild.remove()}
+function ui(){
+document.getElementById("annoyance").textContent=state.annoyance;document.getElementById("review").textContent=state.reviewScore;document.getElementById("suspicion").textContent=state.suspicion;document.getElementById("annoyancelabel").textContent=state.annoyance;document.getElementById("reviewlabel").textContent=state.reviewScore;document.getElementById("suspicionlabel").textContent=state.suspicion;document.getElementById("annoyancefill").style.width=state.annoyance+"%";document.getElementById("reviewfill").style.width=(state.reviewScore*20)+"%";document.getElementById("suspicionfill").style.width=state.suspicion+"%";document.getElementById("course").textContent=state.course;document.getElementById("candy").textContent=state.candy;document.getElementById("angry").textContent=state.angry;document.getElementById("later").textContent=state.later?"yes":"no";
+const inv=document.getElementById("inventory");inv.innerHTML="";state.inventory.forEach(item=>{const c=document.createElement("span");c.className="item";c.textContent=item;inv.appendChild(c)})}
+function scene(ch,title,text,choices){document.getElementById("chapter").textContent="chapter "+ch;document.getElementById("title").textContent=title;document.getElementById("text").textContent=text;const box=document.getElementById("choices");box.innerHTML="";choices.forEach(o=>{const b=document.createElement("button");b.className="choice";b.textContent=o.label;b.addEventListener("click",()=>{o.action();ui();save()});box.appendChild(b)});ui();save()}
+function reviewcard(stars,text){document.getElementById("reviewbox").style.display="block";document.getElementById("stars").textContent="⭐".repeat(stars);document.getElementById("reviewtext").textContent=text}
+function end(emoji,title,text){document.getElementById("endingemoji").textContent=emoji;document.getElementById("endingtitle").textContent=title;document.getElementById("endingtext").textContent=text;document.getElementById("ending").style.display="flex"}
+function candyRain(){const list=["🍬","🍭","🍫","🧁","🍩","🍪"];for(let i=0;i<24;i++){const c=document.createElement("div");c.className="candy";c.textContent=list[Math.floor(Math.random()*list.length)];c.style.left=Math.random()*100+"vw";c.style.animationDuration=(1.1+Math.random()*1.2)+"s";c.style.fontSize=(20+Math.random()*18)+"px";document.body.appendChild(c);setTimeout(()=>c.remove(),2400)}}
+function arrival(){scene(1,"the restaurant 🍝","chez was five years old and very, very serious about food. she walked into the restaurant with a tiny notebook hidden under her arm. nobody knew the truth: chez was secretly a reviewer. the staff thought she was just an unusually demanding little customer.",[
+{label:"🪑 chez sits down quietly",action:()=>{flag("quiet");log("🪑 chez opened her secret reviewer notebook.");menu()}},
+{label:"🔔 chez rings the bell immediately",action:()=>{inc("annoyance",8);inc("suspicion",3);log("🔔 chez rang the table bell before getting a menu.");menu()}},
+{label:"🧂 chez asks for 17 napkins",action:()=>{inc("annoyance",12);log("🧂 chez requested exactly 17 napkins.");menu()}},
+{label:"📸 chez photographs the ceiling",action:()=>{inc("suspicion",6);log("📸 chez took three photos of the ceiling for the review.");menu()}}])}
+function menu(){scene(1,"the menu 📖","the waiter handed chez the menu. she stared at it for a suspiciously long time, then slowly closed it.",[
+{label:"❓ chez asks what everything means",action:()=>{inc("annoyance",10);log("❓ chez asked what 'pasta' meant.");order()}},
+{label:"📋 chez asks for a different menu",action:()=>{inc("annoyance",14);inc("suspicion",4);log("📋 chez said the first menu looked suspicious.");order()}},
+{label:"🍝 chez orders the fanciest thing",action:()=>{add("🍝 fancy pasta");log("🍝 chez ordered the fanciest dish.");order()}},
+{label:"🖊️ chez circles every item",action:()=>{inc("suspicion",8);add("🖊️ menu full of circles");log("🖊️ chez circled almost everything on the menu.");order()}}])}
+function order(){scene(2,"the order 🍔","the waiter returned to take chez's order. she looked completely innocent. the restaurant still had no idea who they were dealing with.",[
+{label:"🧊 exactly 11 ice cubes",action:()=>{inc("annoyance",13);log("🧊 chez requested exactly 11 ice cubes.");course1()}},
+{label:"🍟 change the fries order three times",action:()=>{inc("annoyance",15);log("🍟 chez changed the fry order three times.");course1()}},
+{label:"🥤 invent a drink",action:()=>{inc("annoyance",11);log("🥤 chez invented a drink that was not on the menu.");course1()}},
+{label:"😇 order normally",action:()=>{log("😇 chez ordered normally. the staff became suspicious because this was too calm.");course1()}}])}
+function course1(){state.course=1;scene(2,"the appetizer 🍞","the appetizer arrived. chez took one tiny bite and examined the plate like a detective.",[
+{label:"🧐 inspect the plate for 30 seconds",action:()=>{inc("annoyance",10);inc("suspicion",5);log("🧐 chez inspected the appetizer from four angles.");course2()}},
+{label:"📓 write a huge note",action:()=>{inc("suspicion",9);log("📓 chez wrote 'interesting' and underlined it seven times.");course2()}},
+{label:"🧂 ask for salt, then remove it",action:()=>{inc("annoyance",16);log("🧂 chez changed her mind about salt twice.");course2()}},
+{label:"😋 actually enjoy it",action:()=>{state.reviewScore+=1;log("😋 chez actually liked the appetizer.");course2()}}])}
+function course2(){state.course=2;scene(2,"the main course 🍝","the main dish arrived. it looked delicious. chez took a bite and slowly looked toward the staff.",[
+{label:"🥄 ask for a different fork",action:()=>{inc("annoyance",12);log("🥄 chez said the first fork was 'too fork-like.'");dessert()}},
+{label:"🌶️ ask for sauce, then remove it",action:()=>{inc("annoyance",15);log("🌶️ chez changed the sauce request twice.");dessert()}},
+{label:"📸 take 14 photos",action:()=>{inc("suspicion",9);log("📸 chez took 14 photos of the main course.");dessert()}},
+{label:"😋 actually enjoy the food",action:()=>{state.reviewScore+=2;log("😋 chez genuinely enjoyed the main course.");dessert()}}])}
+function dessert(){state.course=3;scene(3,"dessert 🍰","dessert arrived. the waiter smiled politely. chez looked at the dessert, then at the waiter, then back at the dessert.",[
+{label:"🍰 ask for six spoons",action:()=>{inc("annoyance",12);log("🍰 chez requested six spoons for one dessert.");finishMeal()}},
+{label:"🧁 ask if dessert is emotionally ready",action:()=>{inc("annoyance",18);inc("suspicion",4);log("🧁 chez asked whether the dessert was emotionally ready.");finishMeal()}},
+{label:"📓 write one final note",action:()=>{inc("suspicion",8);add("📓 final reviewer notes");log("📓 chez wrote one final reviewer note.");finishMeal()}},
+{label:"😋 eat dessert immediately",action:()=>{state.reviewScore+=2;log("😋 chez loved the dessert.");finishMeal()}}])}
+function finishMeal(){scene(3,"the secret review ⭐","chez pushed the plate away. the meal was over. the staff still had no idea that their most annoying customer was about to publish a review.",[
+{label:"⭐ rate it 5/5",action:()=>makeReview(5,"amazing food. the staff survived the reviewer test.")},
+{label:"⭐ rate it 4/5",action:()=>makeReview(4,"really good food. some chaos, but still worth it.")},
+{label:"⭐ rate it 2/5",action:()=>makeReview(2,"the food was okay. the experience was interesting.")},
+{label:"⭐ rate it 1/5",action:()=>makeReview(1,"i have several questions and at least one complaint about a spoon.")}
+])}
+function makeReview(score,text){state.reviewScore=score;flag("review");reviewcard(score,text);log("⭐ chez secretly posted a "+score+"/5 review.");setTimeout(()=>{state.later=true;ui();log("⏰ 1 hour later...");later(score)},900)}
+function later(score){scene(4,"1 hour later ⏰","the restaurant staff checked the reviews. they found chez's review. the manager read it twice. then the staff became extremely angry.",[
+{label:"😶 chez is safely at home",action:()=>{state.angry=85;log("😡 the restaurant staff started searching for the reviewer.");revenge()}},
+{label:"📱 chez checks the replies",action:()=>{state.angry=92;inc("suspicion",15);log("📱 the restaurant replied: 'we know.'");revenge()}},
+{label:"🍪 chez watches from the couch",action:()=>{state.angry=78;log("🏠 chez was at home, completely unaware of the incoming revenge mission.");revenge()}}])}
+function revenge(){scene(4,"the restaurant wants revenge 😡","the restaurant staff stormed toward chez's house with menus, aprons, and a giant box of candy. they wanted revenge on the mystery reviewer.",[
+{label:"🏃 chez hides",action:()=>{inc("suspicion",4);log("🏃 chez hid behind the couch.");mom()}},
+{label:"🚪 chez locks the door",action:()=>{inc("suspicion",6);log("🚪 chez locked the door and waited.");mom()}},
+{label:"📓 chez shows mom the review",action:()=>{log("📓 chez showed mom what she had written.");mom()}},
+{label:"🍬 chez asks for the candy",action:()=>{log("🍬 chez noticed the giant box of candy.");mom()}}])}
+function mom(){scene(5,"mom has arrived 🍬","just when the restaurant people reached the house, chez's mom walked outside. she looked at the angry staff, then at the giant box of candy they had brought.",[
+{label:"🍬 mom steals all the candy",action:()=>{state.candy=99;add("🍬 giant box of stolen candy");log("🍬 mom took all the candy.");mainEnding()}},
+{label:"😎 mom says 'absolutely not'",action:()=>{state.candy=50;add("🍬 candy from mom");log("😎 mom sent the restaurant people home and gave chez candy.");mainEnding()}},
+{label:"🦸 mom blocks the door",action:()=>{state.candy=25;add("🍬 emergency candy");log("🦸 mom protected chez and confiscated the candy.");mainEnding()}}])}
+function mainEnding(){candyRain();end("🍬❤️","the candy ending","the restaurant staff went home, mom stole all their candy, and chez got candy anyway. she was five years old, she had secretly reviewed the restaurant, and she had absolutely no regrets.")}
+function restart(chaosMode){state=fresh();if(chaosMode){state.annoyance=40;state.suspicion=30;add("🧨 extremely annoying reviewer card");log("💀 maximum reviewer chaos activated.")}else{log("🍝 a new secret restaurant review begins.")}document.getElementById("ending").style.display="none";document.getElementById("log").innerHTML="";document.getElementById("reviewbox").style.display="none";arrival();ui();save()}
+document.getElementById("reset").addEventListener("click",()=>restart(false));document.getElementById("again").addEventListener("click",()=>restart(false));document.getElementById("worse").addEventListener("click",()=>restart(true));
+ui();log("🍝 chez arrived at the restaurant.");arrival();
+</script>
+</body>
+</html>
